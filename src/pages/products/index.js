@@ -1,8 +1,8 @@
 import React from 'react'
 import { Container, Grid, Segment, Input } from 'semantic-ui-react'
 import ProductItem from './item'
-import BtnSort from './btn-sort'
-import BtnFilter from './btn-filter'
+import BtnSort from '../../components/btn-sort'
+import BtnFilter from '../../components/btn-filter'
 import './styles.css';
 
 class ListProduct extends React.Component {

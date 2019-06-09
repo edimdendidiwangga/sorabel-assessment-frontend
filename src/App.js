@@ -2,9 +2,9 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 // pages
 import DefaultLayouts from './components/layout/default-layouts'
-import Products from './components/products';
-import ProductDetail from './components/detail';
-import AddProduct from './components/add-product';
+import Products from './pages/products';
+import ProductDetail from './pages/detail';
+import AddProduct from './pages/add-product';
 
 class App extends React.Component {
   render() {
