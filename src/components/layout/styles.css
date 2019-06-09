@@ -12,3 +12,10 @@
   max-width: 35em !important;
   margin: 0 auto 0 auto;
 }
+
+@media (min-width: 320px) and (max-width: 480px) {
+  .ui.secondary.menu.custom-header {
+    max-width: 100% !important;
+    margin: 0;
+  }
+}
