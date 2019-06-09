@@ -21,12 +21,12 @@ class ListProduct extends React.Component {
             <Grid.Row columns={1}>
               <Grid.Column>
                 <Segment className="search-sort-filter">
-                  <div className="section-search">
-                    <Input icon='search' fluid placeholder='Search...' />
-                  </div>
                   <div className="section-filter">
                     <BtnFilter />
                     <BtnSort />
+                  </div>
+                  <div className="section-search">
+                    <Input icon='search' fluid placeholder='Search...' />
                   </div>
                 </Segment>
               </Grid.Column>
