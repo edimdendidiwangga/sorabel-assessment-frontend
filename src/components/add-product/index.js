@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Checkbox, Form, Container } from 'semantic-ui-react'
+import { Button, Form, Container } from 'semantic-ui-react'
 import './styles.css';
 
 const FormExampleForm = () => (

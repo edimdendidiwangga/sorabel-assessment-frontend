@@ -1,8 +1,15 @@
 import React from 'react'
 import { Button, Header, Icon, Modal } from 'semantic-ui-react'
+import Link from 'react-router-dom/Link';
 
 const ModalExampleCloseIcon = () => (
-  <Modal size="mini" trigger={<a><Icon name='trash' /> Delete</a>} closeIcon>
+  <Modal size="mini"
+    trigger={
+      <Link>
+        <Icon name='trash' /> Delete
+      </Link>
+    }
+    closeIcon>
     <Header icon='archive' content='Delete Product' />
     <Modal.Content>
       <p>
