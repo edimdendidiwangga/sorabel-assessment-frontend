@@ -1,0 +1,28 @@
+.list-products {
+  max-width: 35em !important;
+  min-height: 95vh;
+  margin: 0 auto;
+  padding: 1em 2em 0 2em;
+  background-color: #fff;
+}
+
+.search-sort-filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.section-search {
+  width: 42%;
+}
+
+.section-filter {
+  width: 55%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.product-item {
+  cursor: pointer;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './header';
 import { Container } from 'semantic-ui-react'
+import './styles.css';
 // import Footer from '../components/Footer/';
 
 class DefaultLayouts extends React.Component {
@@ -13,10 +14,10 @@ class DefaultLayouts extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <Container>
+      <div className="container-sorabel">
         <Header />
         { children }
-      </Container>
+      </div>
     );
   }
 }

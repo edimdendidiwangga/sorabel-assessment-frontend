@@ -1,0 +1,7 @@
+.add-product {
+  max-width: 35em !important;
+  min-height: 95vh;
+  margin: 0 auto;
+  padding: 1em;
+  background-color: #fff;
+}

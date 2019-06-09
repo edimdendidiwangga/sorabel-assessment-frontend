@@ -1,0 +1,14 @@
+.container-sorabel {
+  background-color: silver;
+}
+
+.container-menu-header {
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid #ccc;
+}
+
+.ui.secondary.menu.custom-header {
+  max-width: 35em !important;
+  margin: 0 auto 0 auto;
+}
