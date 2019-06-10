@@ -1,5 +1,9 @@
 import React from 'react'
 import { Container, Grid, Segment, Input } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+// components
 import ProductItem from './item'
 import BtnSort from '../../components/btn-sort'
 import BtnFilter from '../../components/btn-filter'
@@ -14,6 +18,7 @@ class ListProduct extends React.Component {
 
   render() {
     const { history } = this.props;
+    console.log('props', this.props)
     return (
       <div className="list-products">
         <Container>
@@ -54,4 +59,16 @@ class ListProduct extends React.Component {
   }
 }
 
-export default ListProduct
+const mapStateToProps = (state) => {
+  return {
+    products: state.firestore.ordered.products,
+    auth: state.firebase.auth,
+  }
+}
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection: 'products', limit: 3, orderBy: ['createdAt', 'desc']},
+  ])
+)(ListProduct)

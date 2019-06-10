@@ -1,4 +1,8 @@
 @media (min-width: 320px) and (max-width: 480px) {
+  .ui.secondary.menu.custom-header {
+    max-width: 100% !important;
+    margin: 0;
+  }
   .list-products {
     max-width: 100% !important;
     min-height: 100%;
@@ -21,9 +25,5 @@
     margin: 0 auto;
     padding: 0;
     background-color: #fff;
-  }
-  .ui.secondary.menu.custom-header {
-    max-width: 100% !important;
-    margin: 0;
   }
 }
