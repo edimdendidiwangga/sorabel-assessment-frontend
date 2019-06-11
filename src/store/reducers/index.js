@@ -1,10 +1,12 @@
-import productsReducer from './products'
+import { addProduct, deleteProduct, openModal } from './products'
 import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore';
 import { firebaseReducer } from 'react-redux-firebase'
 
 const rootReducer = combineReducers({
-  addProduct: productsReducer,
+  addProduct,
+  deleteProduct,
+  openModal,
   firestore: firestoreReducer,
   firebase: firebaseReducer
 });
