@@ -78,13 +78,6 @@ class AddProductForm extends React.Component {
               </Message>
             )
           }
-          {
-            addProduct.isSuccess && (
-              <Message positive>
-                <Message.Header>Create product successful</Message.Header>
-              </Message>
-            )
-          }
           <Form>
             <Form.Field>
               <Form.Input fluid label="Nama Produk" name="name" value={form.name} placeholder='Isi nama produk' onChange={e => this.handleInput(e)} autoComplete="off" />

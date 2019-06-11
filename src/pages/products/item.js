@@ -21,7 +21,9 @@ class CardExampleCard extends React.Component {
     const { item } = this.props
     return (
       <Card fluid className="product-item">
-        <MyImage onClick={this.toDetail} src={item.img_url} className="img-product" />
+        <div onClick={this.toDetail}>
+          <MyImage src={item.img_url} className="img-product" />
+        </div>
         <Card.Content onClick={this.toDetail}>
           <Card.Header>{ReadAbleText(item.name)}</Card.Header>
           <Card.Meta>
