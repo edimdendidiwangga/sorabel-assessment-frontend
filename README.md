@@ -1,12 +1,21 @@
-## Available Scripts
+This project was semantic ui with Create React App.
 
-In the project directory, you can run:
+Use Firebase as a database platform.
 
-### `npm start`
+## Setup Instalation
+(i assume Node Js and NPM package manager have installed on your machine)
+1. open your terminal and clone this project. 
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
+https://github.com/edimdendidiwangga/sorabel-assessment-frontend.git
+```
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+2. next step after clone project
+
+```
+cd folder project && npm install
+```
+
+3. after install all dependencies that we need, run `npm start`. It will run on `localhost:3000`.
+
 
