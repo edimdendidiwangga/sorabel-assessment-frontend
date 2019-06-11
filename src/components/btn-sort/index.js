@@ -1,12 +1,17 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Responsive, Dropdown } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 import { sortProducts } from '../../store/actions/products'
 
 class SortProduct extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      options: [
+        { text: 'Terbaru', value: 'newest' },
+        { text: 'Harga Termahal', value: 'expensive' },
+        { text: 'Harga Termurah', value: 'cheapest' },
+      ],
     };
   }
 
@@ -15,27 +20,17 @@ class SortProduct extends Component {
   }
 
   render() {
+    const { options } = this.state
     return (
-      <Fragment>
-        <Responsive minWidth={481}>
-          <Dropdown text='Sort' icon='sort' direction="right" labeled button className='icon'>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => this.handleSort('newest')}>Terbaru</Dropdown.Item>
-              <Dropdown.Item onClick={() => this.handleSort('expensive')}>Harga Termahal</Dropdown.Item>
-              <Dropdown.Item onClick={() => this.handleSort('cheapest')}>Harga Termurah</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Responsive>
-        <Responsive minWidth={320} maxWidth={480}>
-          <Dropdown icon='sort' direction="right" button className='icon'>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => this.handleSort('newest')}>Terbaru</Dropdown.Item>
-              <Dropdown.Item onClick={() => this.handleSort('expensive')}>Harga Termahal</Dropdown.Item>
-              <Dropdown.Item onClick={() => this.handleSort('cheapest')}>Harga Termurah</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </Responsive>
-      </Fragment>
+      <Dropdown
+        text='Sort'
+        icon='sort'
+        direction="right"
+        labeled
+        button
+        className='icon'
+        options={options}
+        onChange={(e, data) => this.handleSort(data.value)} />
     )
   }
 }

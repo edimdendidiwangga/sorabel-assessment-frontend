@@ -26,4 +26,22 @@
     padding: 0;
     background-color: #fff;
   }
+  .search-sort-filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .section-search {
+    width: 100%;
+  }
+  .section-filter {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1em;
+  }
+  .ui.card>.content>.meta+.description {
+    min-height: 3em;
+  }
 }

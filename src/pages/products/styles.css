@@ -32,3 +32,11 @@
   height: 18em;
   object-fit: cover;
 }
+
+.ui.card>.content>.meta+.description {
+  min-height: 2em;
+}
+
+.ui.card>.content {
+  padding-bottom: 0 !important;
+}

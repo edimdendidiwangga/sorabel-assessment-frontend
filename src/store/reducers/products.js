@@ -6,8 +6,9 @@ const initState = {
   isError: false,
 }
 const initialize = {
+  search: '',
   limit: 5,
-  filter: null,
+  category: 0,
   sort: ['createdAt', 'desc'],
 }
 
@@ -65,20 +66,20 @@ export const deleteProduct = (state = initState, action) => {
 
 export const manage = (state = initialize, action) => {
   switch (action.type) {
-    case types.SORT_NEWEST_PRODUCTS:
+    case types.SORT_PRODUCTS:
       return {
         ...state,
-        sort: ['createdAt', 'desc'],
+        sort: action.payload ,
       };
-    case types.SORT_MOST_EXPENSIVE_PRODUCTS:
+    case types.FILTER_PRODUCTS:
       return {
         ...state,
-        sort: ['price', 'desc'],
+        category: action.payload ,
       };
-    case types.SORT_CHEAPEST_PRODUCTS:
+    case types.SEARCH_PRODUCTS:
       return {
         ...state,
-        sort: ['price', 'asc'],
+        search: action.payload ,
       };
     default:
       return state;

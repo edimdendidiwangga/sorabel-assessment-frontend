@@ -40,7 +40,7 @@ class ProductItem extends React.Component {
           <Card.Description>
             {
               item.description.charAt(20)
-              ? `${item.description.substring(0, 15)} ...`
+              ? `${item.description.substring(0, 20)} ...`
               : item.description
             }
           </Card.Description>

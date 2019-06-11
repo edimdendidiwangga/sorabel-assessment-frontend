@@ -35,13 +35,23 @@ export const openOrCloseModal = (isOpen, id) => (dispatch) => {
 };
 
 export const sortProducts = (type) => (dispatch) => {
+  let payload =  ['createdAt', 'desc'];
   if (type === 'newest') {
-    dispatch({ type: types.SORT_NEWEST_PRODUCTS });
+    payload = ['createdAt', 'desc'];
   }
   if (type === 'expensive') {
-    dispatch({ type: types.SORT_MOST_EXPENSIVE_PRODUCTS });
+    payload = ['price', 'desc'];
   }
   if (type === 'cheapest') {
-    dispatch({ type: types.SORT_CHEAPEST_PRODUCTS });
+    payload = ['price', 'asc'];
   }
+  dispatch({ type: types.SORT_PRODUCTS, payload });
+};
+
+export const filterProducts = (category) => (dispatch) => {
+  dispatch({ type: types.FILTER_PRODUCTS, payload: category });
+};
+
+export const searchProducts = (search) => (dispatch) => {
+  dispatch({ type: types.SEARCH_PRODUCTS, payload: search });
 };
