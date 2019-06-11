@@ -4,7 +4,7 @@ import { firestoreReducer } from 'redux-firestore';
 import { firebaseReducer } from 'react-redux-firebase'
 
 const rootReducer = combineReducers({
-  addProducts: productsReducer,
+  addProduct: productsReducer,
   firestore: firestoreReducer,
   firebase: firebaseReducer
 });

@@ -1,6 +1,8 @@
 import React from 'react'
-import { Card, Image } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import ConfirmDelete from './confirm'
+import MyImage from '../../components/my-image'
+import { ReadAbleText, RupiahFormat } from '../../helper'
 
 class CardExampleCard extends React.Component {
   constructor(props) {
@@ -11,20 +13,22 @@ class CardExampleCard extends React.Component {
   }
 
   toDetail() {
-    this.props.history.push(`/detail/${123}`);
+    const { item, history } = this.props
+    history.push(`/detail/${item.id}`);
   }
 
   render() {
+    const { item } = this.props
     return (
       <Card fluid className="product-item">
-        <Image onClick={this.toDetail} src='https://imager-next.freetls.fastly.net/images/resized/480/a8b632a3-ef83-46a8-a9b1-58d7b5f86e1c' wrapped ui={false} />
+        <MyImage onClick={this.toDetail} src={item.img_url} className="img-product" />
         <Card.Content onClick={this.toDetail}>
-          <Card.Header>Matthew</Card.Header>
+          <Card.Header>{ReadAbleText(item.name)}</Card.Header>
           <Card.Meta>
-            <span className='date'>Rp 200.000</span>
+            <span className='date'>Rp {RupiahFormat(item.price)}</span>
           </Card.Meta>
           <Card.Description>
-            Matthew is a musician living in Nashville.
+            {item.description}
           </Card.Description>
         </Card.Content>
         <Card.Content extra>

@@ -17,7 +17,7 @@ class ListProduct extends React.Component {
   }
 
   render() {
-    const { history } = this.props;
+    const { history, products } = this.props;
     console.log('props', this.props)
     return (
       <div className="list-products">
@@ -36,22 +36,31 @@ class ListProduct extends React.Component {
                 </Segment>
               </Grid.Column>
             </Grid.Row>
-            <Grid.Row columns={2}>
+            {
+              products && products.map((p, idx) => {
+                return (
+                  <Grid.Column key={idx}>
+                    <ProductItem history={history} item={p} />
+                  </Grid.Column>
+                );
+              }).reduce((r, element, index) => {
+                index % 2 === 0 && r.push([]);
+                r[r.length - 1].push(element);
+                return r;
+              }, []).map((rowContent, i) => {
+                return (
+                  <Grid.Row columns={2} key={i}>{rowContent}</Grid.Row>
+                );
+              })
+            }
+            {/* <Grid.Row columns={2}>
               <Grid.Column>
                 <ProductItem history={history} />
               </Grid.Column>
               <Grid.Column>
                 <ProductItem history={history} />
               </Grid.Column>
-            </Grid.Row>
-            <Grid.Row columns={2}>
-              <Grid.Column>
-                <ProductItem history={history} />
-              </Grid.Column>
-              <Grid.Column>
-                <ProductItem history={history} />
-              </Grid.Column>
-            </Grid.Row>
+            </Grid.Row> */}
           </Grid>
         </Container>
       </div>
@@ -62,13 +71,12 @@ class ListProduct extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products: state.firestore.ordered.products,
-    auth: state.firebase.auth,
   }
 }
 
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'products', limit: 3, orderBy: ['createdAt', 'desc']},
+    { collection: 'products', limit: 10, orderBy: ['createdAt', 'desc'] },
   ])
 )(ListProduct)

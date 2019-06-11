@@ -17,7 +17,7 @@ export default class MenuExampleSecondary extends Component {
           <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick}>
             <Link to="/">
               <Header as='h2' color='purple'>
-                PURPLE
+                SORABEL
               </Header>
             </Link>
           </Menu.Item>
