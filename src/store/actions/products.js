@@ -59,3 +59,7 @@ export const searchProducts = (search) => (dispatch) => {
 export const getMoreProducts = () => (dispatch) => {
   dispatch({ type: types.GET_MORE_PRODUCTS });
 };
+
+export const hasMoreProducts = (hasMore, limit) => (dispatch) => {
+  dispatch({ type: types.HAS_LOAD_MORE, payload: { hasMore, limit } });
+};

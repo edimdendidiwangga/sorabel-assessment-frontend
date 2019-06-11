@@ -6,6 +6,7 @@ const initState = {
   isError: false,
 }
 const initialize = {
+  hasMore: false,
   search: '',
   limit: 5,
   category: 0,
@@ -69,22 +70,31 @@ export const manage = (state = initialize, action) => {
     case types.SORT_PRODUCTS:
       return {
         ...state,
+        limit: 5,
         sort: action.payload ,
       };
     case types.FILTER_PRODUCTS:
       return {
         ...state,
+        limit: 5,
         category: action.payload ,
       };
     case types.SEARCH_PRODUCTS:
       return {
         ...state,
-        search: action.payload ,
+        limit: 5,
+        search: action.payload,
       };
     case types.GET_MORE_PRODUCTS:
       return {
         ...state,
         limit: state.limit + 5,
+      };
+    case types.HAS_LOAD_MORE:
+      return {
+        ...state,
+        limit: action.payload.limit || state.limit,
+        hasMore: action.payload.hasMore,
       };
     default:
       return state;

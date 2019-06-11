@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Grid, Segment, Input, Dimmer, Loader } from 'semantic-ui-react'
+import { Container, Grid, Segment, Input } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
@@ -16,19 +16,11 @@ import { removeProduct, openOrCloseModal, searchProducts, getMoreProducts } from
 
 import './styles.css';
 
-const overflow = {
-  // overflowY: 'auto',
-  // overflowX: 'hidden',
-  // height: '90vh',
-  // marginBottom: '4em',
-};
-
 class ListProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loadingSearch: false,
-      hasMore: true,
     };
     this.timeout = null;
     this.loadMore = this.loadMore.bind(this);
@@ -43,9 +35,11 @@ class ListProduct extends React.Component {
         getMoreProducts()
         setTimeout(() => {
           this.loadMoreProducts = false
-        }, 500);
+        }, 2000);
       } else {
-        this.setState({ hasMore: false })
+        setTimeout(() => {
+          this.loadMoreProducts = false
+        }, 2000);
       }
     }
   }
@@ -90,9 +84,10 @@ class ListProduct extends React.Component {
   }
 
   render() {
-    const { loadingSearch, hasMore } = this.state;
+    const { loadingSearch } = this.state;
     const { history, products } = this.props;
     if (!products) return <Loading />
+
     return (
       <div className="list-products">
         <ConfirmDelete
@@ -117,15 +112,15 @@ class ListProduct extends React.Component {
               </Grid.Column>
             </Grid.Row>
             {
-              loadingSearch && <LoadingMini />
+              loadingSearch && !this.loadMoreProducts && <LoadingMini />
             }
             <InfiniteScroll
               pageStart={0}
               loadMore={this.loadMore}
-              hasMore={hasMore}
-              loader={<div className="loader"><LoadingMini /></div>}>
+              hasMore={products.length % 5 === 0}
+              loader={<LoadingMini />}>
               {
-                !loadingSearch && this.handleData().map((item, idx) => {
+                this.handleData().map((item, idx) => {
                   return (
                     <ProductItem
                       history={history}
