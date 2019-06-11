@@ -21,6 +21,7 @@ class ListProduct extends React.Component {
     super(props);
     this.state = {
       loadingSearch: false,
+      tempProducts: [],
     };
     this.timeout = null;
     this.loadMore = this.loadMore.bind(this);
@@ -68,6 +69,13 @@ class ListProduct extends React.Component {
         }
         return products
       }
+      if (manage.search && products.length < 1) {
+        return this.state.tempProducts.filter((data) => {
+          const textSearch = manage.search.split(' ').map(word => `${word}`).join('|');
+          const regex = new RegExp(textSearch, 'gi');
+          return regex.test(data.name);
+        });
+      }
       return products
     }
     return []
@@ -78,8 +86,9 @@ class ListProduct extends React.Component {
     this.setState({ loadingSearch: true })
     if (this.timeout) clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
-      this.setState({ loadingSearch: false })
-      this.props.searchProducts(value)
+      this.setState({ loadingSearch: false , tempProducts: this.props.products }, () => {
+        this.props.searchProducts(value)
+      })
     }, 2000);
   }
 
