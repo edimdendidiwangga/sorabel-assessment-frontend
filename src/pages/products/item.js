@@ -27,21 +27,20 @@ class ProductItem extends React.Component {
 
   render() {
     const { item } = this.props
+    const productName = item.name
     return (
       <Card fluid className="product-item">
         <div onClick={this.toDetail}>
           <MyImage src={item.img_url} className="img-product" />
         </div>
         <Card.Content onClick={this.toDetail}>
-          <Card.Header>{ReadAbleText(item.name)}</Card.Header>
+          <Card.Header size="tiny">{ReadAbleText(productName)}</Card.Header>
           <Card.Meta>
             <span className='date'>Rp {RupiahFormat(item.price)}</span>
           </Card.Meta>
           <Card.Description>
             {
-              item.description.charAt(20)
-              ? `${item.description.substring(0, 20)} ...`
-              : item.description
+              item.description
             }
           </Card.Description>
         </Card.Content>

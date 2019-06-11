@@ -4,23 +4,50 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import _ from 'underscore';
+import InfiniteScroll from 'react-infinite-scroller';
 // components
 import ProductItem from './item'
 import BtnSort from '../../components/btn-sort'
 import BtnFilter from '../../components/btn-filter'
 import Loading from '../../components/loading'
+import LoadingMini from '../../components/loading-mini'
 import ConfirmDelete from './confirm'
-import { removeProduct, openOrCloseModal, searchProducts } from '../../store/actions/products'
+import { removeProduct, openOrCloseModal, searchProducts, getMoreProducts } from '../../store/actions/products'
 
 import './styles.css';
+
+const overflow = {
+  // overflowY: 'auto',
+  // overflowX: 'hidden',
+  // height: '90vh',
+  // marginBottom: '4em',
+};
 
 class ListProduct extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loadingSearch: false
+      loadingSearch: false,
+      hasMore: true,
     };
     this.timeout = null;
+    this.loadMore = this.loadMore.bind(this);
+    this.loadMoreProducts = false;
+  }
+
+  loadMore() {
+    const { products, getMoreProducts } = this.props;
+    if (!this.loadMoreProducts) {
+      this.loadMoreProducts = true
+      if (products.length % 5 === 0) {
+        getMoreProducts()
+        setTimeout(() => {
+          this.loadMoreProducts = false
+        }, 500);
+      } else {
+        this.setState({ hasMore: false })
+      }
+    }
   }
 
   removeProductItem (id) {
@@ -63,7 +90,7 @@ class ListProduct extends React.Component {
   }
 
   render() {
-    const { loadingSearch } = this.state;
+    const { loadingSearch, hasMore } = this.state;
     const { history, products } = this.props;
     if (!products) return <Loading />
     return (
@@ -90,41 +117,23 @@ class ListProduct extends React.Component {
               </Grid.Column>
             </Grid.Row>
             {
-              loadingSearch && 
-              <Segment className="search-sort-filter">
-                <Dimmer active inverted>
-                  <Loader active inline='centered' />
-                </Dimmer>
-              </Segment>
-                 
+              loadingSearch && <LoadingMini />
             }
-            {
-              !loadingSearch && this.handleData().map((item, idx) => {
-                return (
-                  <Grid.Column key={idx}>
+            <InfiniteScroll
+              pageStart={0}
+              loadMore={this.loadMore}
+              hasMore={hasMore}
+              loader={<div className="loader"><LoadingMini /></div>}>
+              {
+                !loadingSearch && this.handleData().map((item, idx) => {
+                  return (
                     <ProductItem
                       history={history}
                       item={item} />
-                  </Grid.Column>
-                );
-              }).reduce((r, element, index) => {
-                index % 2 === 0 && r.push([]);
-                r[r.length - 1].push(element);
-                return r;
-              }, []).map((rowContent, i) => {
-                return (
-                  <Grid.Row columns={2} key={i}>{rowContent}</Grid.Row>
-                );
-              })
-            }
-            {/* <Grid.Row columns={2}>
-              <Grid.Column>
-                <ProductItem history={history} />
-              </Grid.Column>
-              <Grid.Column>
-                <ProductItem history={history} />
-              </Grid.Column>
-            </Grid.Row> */}
+                  );
+                })
+              }
+            </InfiniteScroll>
           </Grid>
         </Container>
       </div>
@@ -145,7 +154,8 @@ const mapDispatchToProps = dispatch => {
   return {
     removeProduct: (param, cb) => dispatch(removeProduct(param, cb)),
     openOrCloseModal: (isOpen, id) => dispatch(openOrCloseModal(isOpen, id)),
-    searchProducts: params => dispatch(searchProducts(params))
+    searchProducts: params => dispatch(searchProducts(params)),
+    getMoreProducts: () => dispatch(getMoreProducts()),
   }
 }
 
