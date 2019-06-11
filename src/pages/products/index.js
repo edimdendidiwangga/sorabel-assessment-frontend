@@ -120,9 +120,10 @@ class ListProduct extends React.Component {
               hasMore={products.length % 5 === 0}
               loader={<LoadingMini />}>
               {
-                this.handleData().map((item, idx) => {
+                this.handleData().map((item, i) => {
                   return (
                     <ProductItem
+                      key={i}
                       history={history}
                       item={item} />
                   );
