@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Input, Menu } from 'semantic-ui-react'
+import { Button, Menu, Header } from 'semantic-ui-react'
+import Link from 'react-router-dom/Link';
+import './styles.css';
 
 export default class MenuExampleSecondary extends Component {
-  state = { activeItem: 'home' }
+  state = { activeItem: '' }
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -10,29 +12,29 @@ export default class MenuExampleSecondary extends Component {
     const { activeItem } = this.state
 
     return (
-      <Menu secondary>
-        <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick} />
-        {/* <Menu.Item
-          name='messages'
-          active={activeItem === 'messages'}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Item
-          name='friends'
-          active={activeItem === 'friends'}
-          onClick={this.handleItemClick}
-        /> */}
-        <Menu.Menu position='right'>
-          <Menu.Item>
-            <Input icon='search' placeholder='Search...' />
+      <div className="container-menu-header">
+        <Menu secondary className="custom-header">
+          <Menu.Item name='home' active={activeItem === 'home'} onClick={this.handleItemClick}>
+            <Link to="/">
+              <Header as='h2' color='purple'>
+                SORABEL
+              </Header>
+            </Link>
           </Menu.Item>
-          <Menu.Item
-            name='logout'
-            active={activeItem === 'logout'}
-            onClick={this.handleItemClick}
-          />
-        </Menu.Menu>
-      </Menu>
+          <Menu.Menu position='right'>
+            <Menu.Item>
+              <Link to="/add">
+                <Button color="purple">Tambah</Button>
+              </Link>
+            </Menu.Item>
+            {/* <Menu.Item
+              name='logout'
+              active={activeItem === 'logout'}
+              onClick={this.handleItemClick}
+            /> */}
+          </Menu.Menu>
+        </Menu>
+      </div>
     )
   }
 }

@@ -1,0 +1,11 @@
+.detail-product {
+  max-width: 35em !important;
+  min-height: 95vh;
+  margin: 0 auto;
+  padding: 0;
+  background-color: #fff;
+}
+
+.ui.card, .ui.cards > .card {
+  box-shadow: none !important;
+}
