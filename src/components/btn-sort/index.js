@@ -1,27 +1,50 @@
-import React, { Fragment } from 'react'
-import { Responsive, Dropdown } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Dropdown } from 'semantic-ui-react'
+import { sortProducts } from '../../store/actions/products'
 
-const DropdownSort = () => (
-  <Fragment>
-    <Responsive minWidth={481}>
-      <Dropdown text='Sort' icon='sort' direction="right" labeled button className='icon'>
-        <Dropdown.Menu>
-          <Dropdown.Item>Terbaru</Dropdown.Item>
-          <Dropdown.Item>Harga Termahal</Dropdown.Item>
-          <Dropdown.Item>Harga Termurah</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </Responsive>
-    <Responsive minWidth={320} maxWidth={480}>
-      <Dropdown icon='sort' direction="right" button className='icon'>
-        <Dropdown.Menu>
-          <Dropdown.Item>Terbaru</Dropdown.Item>
-          <Dropdown.Item>Harga Termahal</Dropdown.Item>
-          <Dropdown.Item>Harga Termurah</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </Responsive>
-  </Fragment>
-)
+class SortProduct extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      options: [
+        { text: 'Terbaru', value: 'newest' },
+        { text: 'Harga Termahal', value: 'expensive' },
+        { text: 'Harga Termurah', value: 'cheapest' },
+      ],
+    };
+  }
 
-export default DropdownSort
+  handleSort(type) {
+    this.props.sortProducts(type)
+  }
+
+  render() {
+    const { options } = this.state
+    return (
+      <Dropdown
+        text='Sort'
+        icon='sort'
+        direction="right"
+        labeled
+        button
+        className='icon'
+        options={options}
+        onChange={(e, data) => this.handleSort(data.value)} />
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    manage: state.manage
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    sortProducts: param => dispatch(sortProducts(param))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortProduct)

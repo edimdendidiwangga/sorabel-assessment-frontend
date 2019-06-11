@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Message, Button, Form, Container } from 'semantic-ui-react'
+import { Message, Button, Form, Container, Dropdown } from 'semantic-ui-react'
 import { createProduct } from '../../store/actions/products'
 import { checkImgURL, inputNumber } from '../../helper'
 import './styles.css';
@@ -12,13 +12,24 @@ class AddProductForm extends React.Component {
       form: {
         img_url: '',
         name: '',
+        category: 0,
         price: '',
         description: '',
         createdAt: new Date(),
       },
       validation: false,
+      options: [
+        { key: 'mini', text: 'Mini Dress', value: 1 },
+        { key: 'midi', text: 'Midi Dress', value: 2 },
+        { key: 'maxi', text: 'Maxi Dress', value: 3 },
+      ]
     };
     this.postProduct = this.postProduct.bind(this)
+  }
+
+  handleCategory(category) {
+    const { form } = this.state
+    this.setState({ form: { ...form, category } })
   }
 
   handleInput(e) {
@@ -52,7 +63,7 @@ class AddProductForm extends React.Component {
     const imgUrlValid = checkImgURL(form.img_url);
     const isAllValid = nameValid && priceValid && descValid && imgUrlValid;
     if (isAllValid) {
-      this.props.createProduct(this.state.form, (isSuccess) => {
+      this.props.createProduct({ ...form, price: Number(form.price) }, (isSuccess) => {
         if (isSuccess) {
           this.props.history.push('/')
         }
@@ -63,7 +74,7 @@ class AddProductForm extends React.Component {
   }
 
   render() {
-    const { form } = this.state
+    const { form, options } = this.state
     const { addProduct } = this.props;
     return (
       <div className="add-product">
@@ -82,6 +93,10 @@ class AddProductForm extends React.Component {
             <Form.Field>
               <Form.Input fluid label="Nama Produk" name="name" value={form.name} placeholder='Isi nama produk' onChange={e => this.handleInput(e)} autoComplete="off" />
               { this.renderValidation('name', 'Mohon isi nama produk') }
+            </Form.Field>
+            <Form.Field>
+              <label>Kategori (Optional)</label>
+              <Dropdown placeholder="Pilih Kategori" fluid selection options={options} onChange={(e, data) => this.handleCategory(data.value)} />
             </Form.Field>
             <Form.Field>
               <Form.Input fluid label="Harga" name="price" value={form.price} placeholder='Isi harga produk' onChange={e => this.handleInput(e)} autoComplete="off" />

@@ -1,31 +1,51 @@
-import React, { Fragment } from 'react'
-import { Responsive, Dropdown } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { Dropdown } from 'semantic-ui-react'
+import { filterProducts } from '../../store/actions/products'
 
-const DropdownFilter = () => (
-  <Fragment>
-    <Responsive minWidth={481}>
-      <Dropdown text='Filter' icon='filter' direction="right" labeled button className='icon'>
-        <Dropdown.Menu>
-          <Dropdown.Header icon='tags' content='Filter by category' />
-          <Dropdown.Item>Semua Barang</Dropdown.Item>
-          <Dropdown.Item>Maxi Dress</Dropdown.Item>
-          <Dropdown.Item>Midi Dress</Dropdown.Item>
-          <Dropdown.Item>Mini Dress</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </Responsive>
-    <Responsive minWidth={320} maxWidth={480}>
-      <Dropdown icon='filter' direction="right" button className='icon'>
-        <Dropdown.Menu>
-          <Dropdown.Header icon='tags' content='Filter by category' />
-          <Dropdown.Item>Semua Barang</Dropdown.Item>
-          <Dropdown.Item>Maxi Dress</Dropdown.Item>
-          <Dropdown.Item>Midi Dress</Dropdown.Item>
-          <Dropdown.Item>Mini Dress</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </Responsive>
-  </Fragment>
-)
+class FilterProducts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      options: [
+        { text: 'Semua Barang', value: 0 },
+        { text: 'Mini Dress', value: 1 },
+        { text: 'Midi Dress', value: 2 },
+        { text: 'Maxi Dress', value: 3 },
+      ],
+    };
+  }
 
-export default DropdownFilter
+  handleFilter(type) {
+    this.props.filterProducts(type)
+  }
+
+  render() {
+    const { options } = this.state;
+    return (
+      <Dropdown
+        text='Filter'
+        icon='filter'
+        direction="right"
+        button
+        className='icon'
+        labeled
+        options={options}
+        onChange={(e, data) => this.handleFilter(data.value)} />
+    )
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    manage: state.manage
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    filterProducts: param => dispatch(filterProducts(param))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FilterProducts)

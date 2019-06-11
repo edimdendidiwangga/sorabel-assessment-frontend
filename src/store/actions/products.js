@@ -4,8 +4,6 @@ export const createProduct = (product, callback) => {
   return (dispatch, getState, { getFirestore }) => {
     dispatch({ type: types.CREATE_PRODUCT_LOADING });
     const firestore = getFirestore();
-    // const profile = getState().firebase.profile;
-    // const authorId = getState().firebase.auth.uid;
     firestore.collection('products').add({
       ...product
     }).then(() => {
@@ -34,4 +32,26 @@ export const removeProduct = (id, callback) => {
 
 export const openOrCloseModal = (isOpen, id) => (dispatch) => {
   dispatch({ type: types.OPEN_OR_CLOSE_MODAL, isOpen, id });
+};
+
+export const sortProducts = (type) => (dispatch) => {
+  let payload =  ['createdAt', 'desc'];
+  if (type === 'newest') {
+    payload = ['createdAt', 'desc'];
+  }
+  if (type === 'expensive') {
+    payload = ['price', 'desc'];
+  }
+  if (type === 'cheapest') {
+    payload = ['price', 'asc'];
+  }
+  dispatch({ type: types.SORT_PRODUCTS, payload });
+};
+
+export const filterProducts = (category) => (dispatch) => {
+  dispatch({ type: types.FILTER_PRODUCTS, payload: category });
+};
+
+export const searchProducts = (search) => (dispatch) => {
+  dispatch({ type: types.SEARCH_PRODUCTS, payload: search });
 };
