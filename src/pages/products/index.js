@@ -31,7 +31,8 @@ class ListProduct extends React.Component {
   }
 
   render() {
-    const { history, products } = this.props;
+    const { history, products, manage } = this.props;
+    console.log('manage', manage)
     if (!products) return <Loading />
     return (
       <div className="list-products">
@@ -91,6 +92,7 @@ const mapStateToProps = (state) => {
     products: state.firestore.ordered.products,
     deleteProduct: state.deleteProduct,
     openModal: state.openModal,
+    manage: state.manage,
   }
 }
 
@@ -103,7 +105,11 @@ const mapDispatchToProps = dispatch => {
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect([
-    { collection: 'products', limit: 10, orderBy: ['createdAt', 'desc'] },
-  ])
+  firestoreConnect((props) => {
+    console.log('props c', props)
+    // if (props.manage.sort) return []
+    return [
+      { collection: 'products', limit: 10, orderBy: props.manage.sort },
+    ]
+  })
 )(ListProduct)

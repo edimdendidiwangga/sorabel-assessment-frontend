@@ -38,7 +38,11 @@ class ProductItem extends React.Component {
             <span className='date'>Rp {RupiahFormat(item.price)}</span>
           </Card.Meta>
           <Card.Description>
-            {item.description}
+            {
+              item.description.charAt(20)
+              ? `${item.description.substring(0, 15)} ...`
+              : item.description
+            }
           </Card.Description>
         </Card.Content>
         <Card.Content extra>

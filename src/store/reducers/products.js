@@ -5,6 +5,11 @@ const initState = {
   isSuccess: false,
   isError: false,
 }
+const initialize = {
+  limit: 5,
+  filter: null,
+  sort: ['createdAt', 'desc'],
+}
 
 export const addProduct = (state = initState, action) => {
   switch (action.type) {
@@ -52,6 +57,28 @@ export const deleteProduct = (state = initState, action) => {
         isLoading: false,
         isSuccess: false,
         isError: true,
+      };
+    default:
+      return state;
+  }
+};
+
+export const manage = (state = initialize, action) => {
+  switch (action.type) {
+    case types.SORT_NEWEST_PRODUCTS:
+      return {
+        ...state,
+        sort: ['createdAt', 'desc'],
+      };
+    case types.SORT_MOST_EXPENSIVE_PRODUCTS:
+      return {
+        ...state,
+        sort: ['price', 'desc'],
+      };
+    case types.SORT_CHEAPEST_PRODUCTS:
+      return {
+        ...state,
+        sort: ['price', 'asc'],
       };
     default:
       return state;
