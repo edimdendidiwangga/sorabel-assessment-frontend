@@ -1,20 +1,28 @@
 import React from 'react'
-import { Card } from 'semantic-ui-react'
-import ConfirmDelete from './confirm'
+import { Card, Icon } from 'semantic-ui-react'
+import Link from 'react-router-dom/Link';
+import { connect } from 'react-redux'
 import MyImage from '../../components/my-image'
 import { ReadAbleText, RupiahFormat } from '../../helper'
+import { openOrCloseModal } from '../../store/actions/products'
 
-class CardExampleCard extends React.Component {
+class ProductItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
     };
     this.toDetail = this.toDetail.bind(this);
+    this.openOrClose = this.openOrClose.bind(this);
   }
 
   toDetail() {
     const { item, history } = this.props
     history.push(`/detail/${item.id}`);
+  }
+
+  openOrClose() {
+    const { openOrCloseModal, openModal, item } = this.props
+    openOrCloseModal(!openModal.isOpen, item.id)
   }
 
   render() {
@@ -34,11 +42,25 @@ class CardExampleCard extends React.Component {
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
-          <ConfirmDelete />
+          <Link onClick={this.openOrClose}>
+            <Icon name='trash' /> Delete
+          </Link>
         </Card.Content>
       </Card>
     )
   }
 }
 
-export default CardExampleCard
+const mapStateToProps = (state) => {
+  return {
+    openModal: state.openModal
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    openOrCloseModal: (isOpen, id) => dispatch(openOrCloseModal(isOpen, id))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductItem)

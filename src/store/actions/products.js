@@ -17,3 +17,21 @@ export const createProduct = (product, callback) => {
     });
   }
 };
+
+export const removeProduct = (id, callback) => {
+  return (dispatch, getState, { getFirestore }) => {
+    dispatch({ type: types.DELETE_PRODUCT_LOADING });
+    const firestore = getFirestore();
+    firestore.collection('products').doc(id).delete().then(() => {
+      callback(true)
+      dispatch({ type: types.DELETE_PRODUCT_SUCCESS, payload: id });
+    }).catch(err => {
+      callback(false)
+      dispatch({ type: types.DELETE_PRODUCT_ERROR }, err);
+    });
+  }
+};
+
+export const openOrCloseModal = (isOpen, id) => (dispatch) => {
+  dispatch({ type: types.OPEN_OR_CLOSE_MODAL, isOpen, id });
+};

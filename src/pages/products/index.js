@@ -8,6 +8,9 @@ import ProductItem from './item'
 import BtnSort from '../../components/btn-sort'
 import BtnFilter from '../../components/btn-filter'
 import Loading from '../../components/loading'
+import ConfirmDelete from './confirm'
+import { removeProduct, openOrCloseModal } from '../../store/actions/products'
+
 import './styles.css';
 
 class ListProduct extends React.Component {
@@ -17,11 +20,23 @@ class ListProduct extends React.Component {
     };
   }
 
+  removeProductItem (id) {
+    const { removeProduct, openModal, openOrCloseModal } = this.props
+    removeProduct(openModal.id, (isSuccess) => {
+      if (isSuccess) {
+
+        openOrCloseModal(!openModal.isOpen, null)
+      }
+    })
+  }
+
   render() {
     const { history, products } = this.props;
     if (!products) return <Loading />
     return (
       <div className="list-products">
+        <ConfirmDelete
+          confirmAction={() => this.removeProductItem()} />
         <Container>
           <Grid centered>
             <Grid.Row columns={1}>
@@ -38,10 +53,12 @@ class ListProduct extends React.Component {
               </Grid.Column>
             </Grid.Row>
             {
-              products && products.map((p, idx) => {
+              products && products.map((item, idx) => {
                 return (
                   <Grid.Column key={idx}>
-                    <ProductItem history={history} item={p} />
+                    <ProductItem
+                      history={history}
+                      item={item} />
                   </Grid.Column>
                 );
               }).reduce((r, element, index) => {
@@ -72,11 +89,20 @@ class ListProduct extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products: state.firestore.ordered.products,
+    deleteProduct: state.deleteProduct,
+    openModal: state.openModal,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    removeProduct: (param, cb) => dispatch(removeProduct(param, cb)),
+    openOrCloseModal: (isOpen, id) => dispatch(openOrCloseModal(isOpen, id))
   }
 }
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([
     { collection: 'products', limit: 10, orderBy: ['createdAt', 'desc'] },
   ])
