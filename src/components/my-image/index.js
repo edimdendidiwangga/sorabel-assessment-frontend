@@ -1,6 +1,5 @@
 import React from 'react';
 import Img from 'react-image';
-// import { Image } from 'semantic-ui-react'
 // themes
 import Images from '../my-image/images';
 
