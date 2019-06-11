@@ -7,6 +7,7 @@ import { compose } from 'redux'
 import ProductItem from './item'
 import BtnSort from '../../components/btn-sort'
 import BtnFilter from '../../components/btn-filter'
+import Loading from '../../components/loading'
 import './styles.css';
 
 class ListProduct extends React.Component {
@@ -18,7 +19,7 @@ class ListProduct extends React.Component {
 
   render() {
     const { history, products } = this.props;
-    console.log('props', this.props)
+    if (!products) return <Loading />
     return (
       <div className="list-products">
         <Container>

@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Card, Image } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
+import Loading from '../../components/loading'
+import MyImage from '../../components/my-image'
+import { ReadAbleText, RupiahFormat } from '../../helper'
 import './styles.css';
 
 class ProductDetail extends Component {
@@ -14,18 +17,18 @@ class ProductDetail extends Component {
 
   render() {
     const { product } = this.props
-    console.log('product', product)
+    if (!product) return <Loading />
     return (
       <div className="detail-product">
         <Card fluid>
-          <Image src='https://imager-next.freetls.fastly.net/images/resized/480/a8b632a3-ef83-46a8-a9b1-58d7b5f86e1c' wrapped ui={false} />
+          <MyImage src={product.img_url} className="img-product-detail" />
           <Card.Content>
-            <Card.Header>Matthew</Card.Header>
+            <Card.Header>{ReadAbleText(product.name)}</Card.Header>
             <Card.Meta>
-              <span className='date'>Rp 200.000</span>
+              <span className='date'>Rp {RupiahFormat(product.price)}</span>
             </Card.Meta>
             <Card.Description>
-              Matthew is a musician living in Nashville.
+              {product.description}
             </Card.Description>
           </Card.Content>
         </Card>
@@ -45,6 +48,6 @@ const mapStateToProps = (state, props) => {
 export default compose(
   connect(mapStateToProps),
   firestoreConnect([
-    { collection: 'products', limit: 10, orderBy: ['createdAt', 'desc'] },
+    { collection: 'products' },
   ])
 )(ProductDetail)
