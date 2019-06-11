@@ -27,11 +27,6 @@ export default class MenuExampleSecondary extends Component {
                 <Button color="purple">Tambah</Button>
               </Link>
             </Menu.Item>
-            {/* <Menu.Item
-              name='logout'
-              active={activeItem === 'logout'}
-              onClick={this.handleItemClick}
-            /> */}
           </Menu.Menu>
         </Menu>
       </div>

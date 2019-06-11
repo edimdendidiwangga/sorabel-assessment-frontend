@@ -81,6 +81,11 @@ export const manage = (state = initialize, action) => {
         ...state,
         search: action.payload ,
       };
+    case types.GET_MORE_PRODUCTS:
+      return {
+        ...state,
+        limit: state.limit + 5,
+      };
     default:
       return state;
   }

@@ -55,3 +55,7 @@ export const filterProducts = (category) => (dispatch) => {
 export const searchProducts = (search) => (dispatch) => {
   dispatch({ type: types.SEARCH_PRODUCTS, payload: search });
 };
+
+export const getMoreProducts = () => (dispatch) => {
+  dispatch({ type: types.GET_MORE_PRODUCTS });
+};

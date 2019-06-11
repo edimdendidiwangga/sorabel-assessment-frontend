@@ -44,4 +44,7 @@
   .ui.card>.content>.meta+.description {
     min-height: 3em;
   }
+  .ui.card>.content>.header:not(.ui) {
+    min-height: 2.5em;
+  }
 }

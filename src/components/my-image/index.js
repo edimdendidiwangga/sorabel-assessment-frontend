@@ -1,6 +1,5 @@
 import React from 'react';
 import Img from 'react-image';
-// themes
 import Images from '../my-image/images';
 
 export default (props) => {
