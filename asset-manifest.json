@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/assesment-frontend/static/css/main.94cbce3d.chunk.css",
-    "main.js": "/assesment-frontend/static/js/main.2a1846ea.chunk.js",
-    "main.js.map": "/assesment-frontend/static/js/main.2a1846ea.chunk.js.map",
-    "runtime~main.js": "/assesment-frontend/static/js/runtime~main.8c55b4a3.js",
-    "runtime~main.js.map": "/assesment-frontend/static/js/runtime~main.8c55b4a3.js.map",
-    "static/css/2.0f1ec643.chunk.css": "/assesment-frontend/static/css/2.0f1ec643.chunk.css",
-    "static/js/2.61611fe1.chunk.js": "/assesment-frontend/static/js/2.61611fe1.chunk.js",
-    "static/js/2.61611fe1.chunk.js.map": "/assesment-frontend/static/js/2.61611fe1.chunk.js.map",
-    "index.html": "/assesment-frontend/index.html",
-    "precache-manifest.100558ce38b621300d45e43ccc205766.js": "/assesment-frontend/precache-manifest.100558ce38b621300d45e43ccc205766.js",
-    "service-worker.js": "/assesment-frontend/service-worker.js",
-    "static/css/2.0f1ec643.chunk.css.map": "/assesment-frontend/static/css/2.0f1ec643.chunk.css.map",
-    "static/css/main.94cbce3d.chunk.css.map": "/assesment-frontend/static/css/main.94cbce3d.chunk.css.map",
-    "static/media/semantic.min.css": "/assesment-frontend/static/media/outline-icons.ef60a4f6.woff"
+    "main.css": "/assessment-frontend/static/css/main.94cbce3d.chunk.css",
+    "main.js": "/assessment-frontend/static/js/main.360aae6f.chunk.js",
+    "main.js.map": "/assessment-frontend/static/js/main.360aae6f.chunk.js.map",
+    "runtime~main.js": "/assessment-frontend/static/js/runtime~main.229f9806.js",
+    "runtime~main.js.map": "/assessment-frontend/static/js/runtime~main.229f9806.js.map",
+    "static/css/2.13f353f1.chunk.css": "/assessment-frontend/static/css/2.13f353f1.chunk.css",
+    "static/js/2.61611fe1.chunk.js": "/assessment-frontend/static/js/2.61611fe1.chunk.js",
+    "static/js/2.61611fe1.chunk.js.map": "/assessment-frontend/static/js/2.61611fe1.chunk.js.map",
+    "index.html": "/assessment-frontend/index.html",
+    "precache-manifest.ccae4231a6ac09ad51073e50cd0a96a2.js": "/assessment-frontend/precache-manifest.ccae4231a6ac09ad51073e50cd0a96a2.js",
+    "service-worker.js": "/assessment-frontend/service-worker.js",
+    "static/css/2.13f353f1.chunk.css.map": "/assessment-frontend/static/css/2.13f353f1.chunk.css.map",
+    "static/css/main.94cbce3d.chunk.css.map": "/assessment-frontend/static/css/main.94cbce3d.chunk.css.map",
+    "static/media/semantic.min.css": "/assessment-frontend/static/media/outline-icons.ef60a4f6.woff"
   }
 }
