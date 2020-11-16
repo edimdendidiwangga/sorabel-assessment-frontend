@@ -13,7 +13,7 @@ class DefaultLayouts extends React.Component {
   render() {
     const { children } = this.props;
     return (
-      <div className="container-sorabel">
+      <div className="container-content">
         <Header />
         { children }
       </div>
