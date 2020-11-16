@@ -7,7 +7,7 @@ Use Firebase as a database platform.
 1. open your terminal and clone this project. 
 
 ```
-https://github.com/edimdendidiwangga/sorabel-assessment-frontend.git
+https://github.com/edimdendidiwangga/assessment-frontend.git
 ```
 
 2. next step after clone project
